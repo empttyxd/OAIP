@@ -111,11 +111,7 @@ def main():
     empty_dict = {}
     print(empty_dict)
 
-    my_dict = {
-        "name": "Alice",
-        "age": 30,
-        "city": "New York"
-        }
+    my_dict = {"name": "Alice", "age": 30, "city": "New York"}
     print("Словарь с элементами:", my_dict)
 
     my_dict["job"] = "Engineer"
