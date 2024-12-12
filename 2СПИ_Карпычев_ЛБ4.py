@@ -67,7 +67,7 @@ def main():
     for i in x:
         count_glas = 0
         for j in i:
-            if j in b:
+            if j in glass:
                 count_glas += 1
         if count_glas > 1:
             count_bez += count_glas - 1
