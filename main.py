@@ -1,6 +1,5 @@
 from horse import horse2
 from template import template
-from functable import func_table
 
 
 def main():
