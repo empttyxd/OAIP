@@ -1,4 +1,4 @@
-from horse2 import horse2
+from horse import horse2
 from template import template
 
 
