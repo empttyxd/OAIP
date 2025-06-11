@@ -1,9 +1,6 @@
 def letters(s):
-    glasnye = 'аеёиоуыэюяАЕЁИОУЫЭЮЯ'
-
+    vowels = 'аеёиоуыэюяАЕЁИОУЫЭЮЯ'
     if not s:
         return 0
-
-    first_glasnye = s[0] in glasnye
-
-    return (1 if first_glasnye else 0) + count_glasnye(s[1:])
+    else:
+        return (s[0] in vowels) + letters(s[1:])
