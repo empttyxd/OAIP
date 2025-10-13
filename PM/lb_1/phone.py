@@ -1,37 +1,72 @@
+#ПРОБЛЕМА АЛМАЗА
+
 class Device:
-    def __init__(self):
-        self.power = 100
+    def __init__(self, power):
+        self.power = power
 
     def turn_on(self):
-        print('включен')
+        print('Enabling')
+
 
 class NetworkedDevice(Device):
-    def __init__(self):
-        super().__init__()
-        self.ip_adress = '4.224.197.46'
+    def __init__(self, power, ip_address):
+        super().__init__(power)
+        self.ip_address = ip_address
 
     def connect(self):
-        print('подключен')
+        print('Internet connection')
+
 
 class PortableDevice(Device):
-    def __init__(self):
-        super().__init__()
-        self.battery_lvl = 100
+    def __init__(self, power, battery_level):
+        super().__init__(power)
+        self.battery_level = battery_level
 
     def charge(self):
-        print('устройство заряжается')
+        print('charging')
+
 
 class SmartPhone(NetworkedDevice, PortableDevice):
-    pass
+    def __init__(self, power, ip_address, battery_level):
+        NetworkedDevice.__init__(self, power, ip_address)
+        PortableDevice.__init__(self, power, battery_level)
 
     def call(self):
-        print('Соединение')
+        print('сalling')
+
+
+#РЕШЕНИЕ ПРОБЛЕМЫ АЛМАЗА
+
+class Device:
+    def __init__(self, power):
+        self.power = power
 
     def turn_on(self):
-        Device.turn_on(self)
+        print('Enable')
 
-a = SmartPhone()
-a.charge()
-a.turn_on()
-a.connect()
-a.call()
+
+class NetworkedDevice(Device):
+    def __init__(self, power, ip_address):
+        super().__init__(self, power)
+        self.ip_address = ip_address
+
+    def connect(self):
+        print('Internet connection')
+
+
+class PortableDevice(Device):
+    def __init__(self, power, battery_level):
+        super().__init__(power)
+        self.battery_level = battery_level
+
+    def charge(self):
+        print('charging')
+
+
+class SmartPhone(NetworkedDevice, PortableDevice):
+    def __init__(self, power, ip_address, battery_level):
+        NetworkedDevice.__init__(self, power, ip_address)
+        PortableDevice.__init__(self, power, battery_level)
+
+    def call(self):
+        print('calling')
