@@ -1,73 +1,83 @@
 class Vehicle:
-    def __init__(self):
-        self.max_speed = 150
-        self.fuel_type = 'asd'
+    def __init__(self, max_speed, fuel_type):
         self.engine = False
-
-
+        self.max_speed = max_speed
+        self.fuel_type = fuel_type
     def start_engine(self):
-        if self.engine == False:
-            self.engine = True
+        self.engine = True
+        print('engine is running')
+
 
 class WheeledVehicle(Vehicle):
-    def __init__(self):
-        super().__init__()
-        self.wheel_count = 4
-        self.tires_status = 100
+    def __init__(self, max_speed, fuel_type, wheel_count):
+        Vehicle.__init__(self, max_speed, fuel_type)
+        self.wheel_count = wheel_count
 
     def check_tires(self):
-        print(self.tires_status, end='%')
+        print('tires checked')
+
 
 class CargoTransport(Vehicle):
-    def __init__(self):
-        super().__init__()
-        self.cargo_capacity = 200
-        self.cargo_weight = 1
+    def __init__(self, max_speed, fuel_type, cargo_capacity):
+        Vehicle.__init__(self, max_speed, fuel_type)
+        self.cargo_capacity = cargo_capacity
+        self.cargo = 0
 
-    def load_cargo(self, a):
-        if self.cargo_weight < self.cargo_capacity:
-            self.cargo_weight += a
+    def load_cargo(self, num):
+        if self.cargo + num > self.cargo_capacity:
+            print('not enough space for cargo')
         else:
-            print('Перегрузка')
+            self.cargo += num
+            print('сargo loaded:', self.cargo)
+
 
 class PassengerTransport(Vehicle):
-    def __init__(self):
-        super().__init__()
-        self.passengers_capacity = 100
-        self.passengers = 1
+    def __init__(self, max_speed, fuel_type, passenger_capacity):
+        Vehicle.__init__(self, max_speed, fuel_type)
+        self.passenger_capacity = passenger_capacity
+        self.passenger = 0
 
-    def board_passangers(self, a):
-        if self.passengers < self.passengers_capacity:
-            self.passengers += a
+    def board_passengers(self, people):
+        if self.passenger + people > self.passenger_capacity:
+            print('Not enough seats for passengers')
         else:
-            print('Нет места')
+            self.passenger += people
+            print('Passengers in transport:', self.passenger)
+
 
 class HeavyDutyVehicle(WheeledVehicle, CargoTransport):
-    def __init__(self):
-        super().__init__()
-        self.max_weight = 400
-        self.frame = 'standart frame'
+    def __init__(self, max_speed, fuel_type, wheel_count, cargo_capacity, max_weight):
+        WheeledVehicle.__init__(self, max_speed, fuel_type, wheel_count)
+        CargoTransport.__init__(self, max_speed, fuel_type, cargo_capacity)
+        self.max_weight = max_weight
 
     def reinforce_frame(self):
-        self.frame = 'reinforce frame'
+        print('The transport frame is reinforced')
+
 
 class EcoFriendlyVehicle(Vehicle):
-    def __init__(self):
-        super().__init__()
-        self.emission_level = 100
+    def __init__(self, max_speed, fuel_type, emission_level):
+        Vehicle.__init__(self, max_speed, fuel_type)
+        self.emission_level = emission_level
 
-    def reduce_emission(self, a):
-        self.emission_level -= a
+    def reduce_emission(self):
+        self.emission_level -= 1
+        print('Current level:', self.emission_level)
 
-class HybridDeliveryVan(HeavyDutyVehicle, EcoFriendlyVehicle, PassengerTransport):
-    pass
+
+class HybridDeliveryVan(HeavyDutyVehicle, PassengerTransport, EcoFriendlyVehicle):
+    def __init__(self, max_speed, fuel_type, wheel_count, cargo_capacity,
+                 max_weight, passenger_capacity, emission_level):
+        HeavyDutyVehicle.__init__(self, max_speed, fuel_type, wheel_count, cargo_capacity, max_weight)
+        PassengerTransport.__init__(self, max_speed, fuel_type, passenger_capacity)
+        EcoFriendlyVehicle.__init__(self, max_speed, fuel_type, emission_level)
 
     def status(self):
-        print(f'Скорость: {self.max_speed}\n'
-              f'Топливо: {self.fuel_type}\n'
-              f'Пассажиры: {self.passengers}\n'
-              f'Выбросы: {self.emission_level}')
-
+        print(f'''Скорость: {self.max_speed}
+        Тип топлива: {self.fuel_type}
+        Груз: {self.cargo}
+        Пассажиры: {self.passenger}
+        Уровень выбросов: {self.emission_level}''')
 
 
 
