@@ -1,14 +1,14 @@
 from typing import Generic, TypeVar
 
 
-A = TypeVar('T')
+T = TypeVar('T')
 
 
-class TypedArray(Generic[A]):
+class TypedArray(Generic[T]):
     def __init__(self):
         self.array = []
 
-    def add(self, item: A):
+    def add(self, item: T):
         self.array.append(item)
 
     def get(self, index):
