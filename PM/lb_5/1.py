@@ -1,11 +1,11 @@
 from typing import Generic, TypeVar
 
 
-A = TypeVar('T')
+T = TypeVar('T')
 
 
-class Point(Generic[A]):
-    def __init__(self, name: str, x: A, y: A, z: A):
+class Point(Generic[T]):
+    def __init__(self, name: str, x: T, y: T, z: T):
         self.name = name
         self.x = x
         self.y = y
