@@ -47,7 +47,7 @@ class Device:
 
 class NetworkedDevice(Device):
     def __init__(self, power, ip_address):
-        super().__init__(self, power)
+        super().__init__(power)
         self.ip_address = ip_address
 
     def connect(self):
@@ -55,7 +55,7 @@ class NetworkedDevice(Device):
 
 
 class PortableDevice(Device):
-    def __init__(self, power, battery_level):
+    def __init__(power, battery_level):
         super().__init__(power)
         self.battery_level = battery_level
 
@@ -70,3 +70,4 @@ class SmartPhone(NetworkedDevice, PortableDevice):
 
     def call(self):
         print('calling')
+
