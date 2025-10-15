@@ -2,67 +2,46 @@ class Vehicle:
     def __init__(self, max_speed, fuel_type):
         self.max_speed = max_speed
         self.fuel_type = fuel_type
-
-    def start_engine(self):
-        print('engine started')
-
+        print(f"🚗 Создан транспорт: {max_speed} км/ч, {fuel_type}")
 
 class WheeledVehicle(Vehicle):
     def __init__(self, max_speed, fuel_type, wheel_count):
         super().__init__(max_speed, fuel_type)
         self.wheel_count = wheel_count
-
-    def check_tires(self):
-        print('wheels checked')
-
+        print(f"   👉 {wheel_count} колёс")
 
 class CargoTransport(Vehicle):
     def __init__(self, max_speed, fuel_type, cargo_capacity):
         super().__init__(max_speed, fuel_type)
         self.cargo_capacity = cargo_capacity
         self.current_cargo = 0
+        print(f"   📦 {cargo_capacity} кг")
 
-    def load_cargo(self, weight):
-            print('cargo loaded')
-
+class HeavyDutyVehicle(WheeledVehicle, CargoTransport):
+    def __init__(self, max_speed, fuel_type, wheel_count, cargo_capacity, max_weight):
+        super().__init__(max_speed, fuel_type, wheel_count, cargo_capacity)
+        self.max_weight = max_weight
+        print(f"   💪 {max_weight} тонн")
 
 class PassengerTransport(Vehicle):
     def __init__(self, max_speed, fuel_type, passenger_capacity):
         super().__init__(max_speed, fuel_type)
         self.passenger_capacity = passenger_capacity
         self.current_passengers = 0
-
-    def board_passengers(self, count):
-            print('passengers loaded')
-
-
-class HeavyDutyVehicle(WheeledVehicle, CargoTransport):
-    def __init__(self, max_speed, fuel_type, wheel_count, cargo_capacity, max_weight):
-        WheeledVehicle.__init__(self, max_speed, fuel_type, wheel_count)
-        CargoTransport.__init__(self, max_speed, fuel_type, cargo_capacity)
-        self.max_weight = max_weight
-
-    def reinforce_frame(self):
-        print('frane reinfirced')
-
+        print(f"   👥 {passenger_capacity} мест")
 
 class EcoFriendlyVehicle(Vehicle):
     def __init__(self, max_speed, fuel_type, emission_level):
         super().__init__(max_speed, fuel_type)
         self.emission_level = emission_level
-
-    def reduce_emission(self):
-        print('emission reduced')
-
+        print(f"   🌿 {emission_level} г/км")
 
 class HybridDeliveryVan(HeavyDutyVehicle, PassengerTransport, EcoFriendlyVehicle):
-    def __init__(self, max_speed, fuel_type, wheel_count, cargo_capacity,
+    def __init__(self, max_speed, fuel_type, wheel_count, cargo_capacity, 
                  max_weight, passenger_capacity, emission_level):
-        HeavyDutyVehicle.__init__(self, max_speed, fuel_type, wheel_count,
-                                  cargo_capacity, max_weight)
-        PassengerTransport.__init__(self, max_speed, fuel_type, passenger_capacity)
-        EcoFriendlyVehicle.__init__(self, max_speed, fuel_type, emission_level)
-
+        super().__init__(max_speed, fuel_type, wheel_count, cargo_capacity, 
+                        max_weight, passenger_capacity, emission_level)
+        print("🎉 ГИБРИДНЫЙ ФУРГОН СОЗДАН!")
 
 
 
